@@ -6,8 +6,8 @@
 package edu.utu.java_01_estructurabasica;
 
 /***
- * NOTA: No se supone que este código sea compilable (de hecho, no lo es), su
- * único propósito es demostrar la sintaxis de Java.
+ * NOTA: No se supone que este código sea compilable (de hecho, no lo es), 
+ * su único propósito es demostrar la sintaxis de Java.
  * @author Luis Sebastián de los Ángeles
  */
 public class EstructurasDeControl {
@@ -30,6 +30,20 @@ public class EstructurasDeControl {
             //de este bloque.
         }
         
+        
+        /**
+         * BUCLES.
+         */
+         
+        /**
+         * Bucle FOR: Las sentencias contenidas en su bloque se ejecutan de forma
+         * repetitiva la cantidad de veces que este establecida en la declaración
+         * del FOR. Esta cantidad se determina mediante una variable interna de tipo
+         * int que sirve de contador. Una condición, que se verifica con cada ejecución
+         * del bucle, chequea que el contador no supere el límite establecido. 
+         * Finalmente
+         * 
+         */
         
     }
     
