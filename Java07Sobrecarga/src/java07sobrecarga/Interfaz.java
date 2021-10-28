@@ -17,7 +17,8 @@ public class Interfaz {
     }
     
     public void Inicio(){
-        
+        mostrar("Bienvenido:");
+        mostrar("Elija una opción")
     }
     
 }
