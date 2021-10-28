@@ -3,19 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package java07sobrecarga;
+package sobrecarga;
 
 /**
  *
- * @author luiss
+ * @author sebastian
  */
-public class Java07Sobrecarga {
+public class Sobrecarga {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        // TODO code application logic here
+        Usuario juan = new Usuario("Juan", "Medina", 12345678,
+                "Algun Lado", 111222333);
         
+        Usuario karina = new Usuario();
     }
     
 }
