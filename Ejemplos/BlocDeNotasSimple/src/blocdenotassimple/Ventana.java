@@ -23,8 +23,15 @@ public class Ventana extends javax.swing.JFrame {
      */
     public Ventana() {
         initComponents();
+        this.setTitle("Archivo sin guardar");
     }
 
+    /**
+     * NOTA: A fines del caso estudiado, IGNORAR LAS LÍNEAS 39 HASTA 93 ya
+     * que las mismas son autogeneradas por el editor de ventanas de Apache NetBeans
+     */
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -90,16 +97,25 @@ public class Ventana extends javax.swing.JFrame {
         // TODO add your handling code here:
         String texto = AreaTexto.getText();
         
-        File archivo = archivos.GuardarComo(this);
-        archivos.GuardarArchivo(texto, archivo);
+        //Reemplazamos los saltos de línea del String con el salto de línea reconocido por el sistema
+        texto = texto.replaceAll("\\\\n", System.getProperty("line.separator"));
+        
+        //Abrimos el diálogo "Abrir Como..."
+        File archivo = archivos.dialogoGuardarComo(this);
+        
+        archivos.guardarArchivo(texto, archivo);
+        
+        this.setTitle(archivo.getAbsolutePath());
         
     }//GEN-LAST:event_btn_guardarActionPerformed
 
     private void btn_abrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_abrirActionPerformed
-        // TODO add your handling code here:
-        File archivo = archivos.AbrirArchivo(this);
-        String texto = archivos.LeerArchivo(archivo);
+        
+        //Abrimos el 
+        File archivo = archivos.dialogoAbrirArchivo(this);
+        String texto = archivos.leerArchivo(archivo);
         AreaTexto.setText(texto);
+        this.setTitle(archivo.getAbsolutePath());
     }//GEN-LAST:event_btn_abrirActionPerformed
 
     /**

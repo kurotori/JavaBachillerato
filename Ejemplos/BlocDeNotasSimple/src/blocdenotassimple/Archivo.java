@@ -20,7 +20,12 @@ import java.util.Scanner;
  */
 public class Archivo {
     
-    public void GuardarArchivo(String texto, File archivo){
+    /**
+     * Crea un archivo de texto en la ruta especificada
+     * @param texto
+     * @param archivo 
+     */
+    public void guardarArchivo(String texto, File archivo){
         try{
             FileOutputStream flujoSalida = 
                     new FileOutputStream(archivo);
@@ -36,7 +41,12 @@ public class Archivo {
         }
     }
     
-    public File GuardarComo(JFrame ventana){
+    /**
+     * Muestra el diálogo "Guardar Cómo"
+     * @param ventana
+     * @return 
+     */
+    public File dialogoGuardarComo(JFrame ventana){
         File archivo;
         JFileChooser dlg_guardarComo = new JFileChooser(
                 FileSystemView.getFileSystemView().getHomeDirectory());
@@ -51,7 +61,12 @@ public class Archivo {
         return archivo;
     }
     
-    public String LeerArchivo(File archivo){
+    /**
+     * Abre un archivo
+     * @param archivo
+     * @return 
+     */
+    public String leerArchivo(File archivo){
         String datos="";
         try {
             Scanner lector = new Scanner(archivo,"UTF-8");
@@ -70,7 +85,13 @@ public class Archivo {
         return datos;
     }
     
-    public File AbrirArchivo(JFrame ventana){
+    
+    /**
+     * Abre el diálogo dialogoAbrirArchivo
+     * @param ventana
+     * @return 
+     */
+    public File dialogoAbrirArchivo(JFrame ventana){
         File archivo;
         
         JFileChooser dlg_abrir = new JFileChooser(
