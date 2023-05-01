@@ -1,19 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package blocdenotassimple;
 
 import java.io.File;
 
 /**
- *
- * @author Sebastian
+ *  Ventana principal de la aplicación
+ * @author Luis Sebastián de los Ángeles
  */
-
-
-
 public class Ventana extends javax.swing.JFrame {
     
     Archivo archivos = new Archivo();
@@ -23,6 +16,8 @@ public class Ventana extends javax.swing.JFrame {
      */
     public Ventana() {
         initComponents();
+        
+        //Agregamos un título a la ventana
         this.setTitle("Archivo sin guardar");
     }
 
@@ -94,27 +89,39 @@ public class Ventana extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
-        // TODO add your handling code here:
+        // Obtenemos el texto del área de texto
         String texto = AreaTexto.getText();
         
         //Reemplazamos los saltos de línea del String con el salto de línea reconocido por el sistema
         texto = texto.replaceAll("\\\\n", System.getProperty("line.separator"));
         
-        //Abrimos el diálogo "Abrir Como..."
+        //Abrimos el diálogo "Abrir Como..." y creamos un objeto con los datos de archivo para guardar los datos
         File archivo = archivos.dialogoGuardarComo(this);
         
-        archivos.guardarArchivo(texto, archivo);
+        //Ejecutamos el método guardarArchivo para agregar los datos al archivo
+        boolean exito = archivos.guardarArchivo(texto, archivo);
         
-        this.setTitle(archivo.getAbsolutePath());
+        //Si el guardado fue exitosos, agregamos la ruta del archivo creado al título
+        if (exito) {
+            this.setTitle(archivo.getAbsolutePath());
+        }
+        
         
     }//GEN-LAST:event_btn_guardarActionPerformed
 
+    
     private void btn_abrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_abrirActionPerformed
         
-        //Abrimos el 
+        //Abrimos el diálodo para abrir archivos, vinculándolo a esta ventana
         File archivo = archivos.dialogoAbrirArchivo(this);
+        
+        //Creamos una variable y le agregamos el texto obtenido del archivo.
         String texto = archivos.leerArchivo(archivo);
+        
+        //Agregamos los datos al área de texto en la ventana
         AreaTexto.setText(texto);
+        
+        //Y agregamos la ruta del archivo elegido al título de la ventana
         this.setTitle(archivo.getAbsolutePath());
     }//GEN-LAST:event_btn_abrirActionPerformed
 
@@ -146,11 +153,13 @@ public class Ventana extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Ventana().setVisible(true);
+        java.awt.EventQueue.invokeLater(
+                new Runnable() {
+                    public void run() {
+                        new Ventana().setVisible(true);
+                }
             }
-        });
+        );
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
