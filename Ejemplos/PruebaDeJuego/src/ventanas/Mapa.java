@@ -4,7 +4,12 @@
  */
 package ventanas;
 
+import herramientas.HerramientasVarias;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Rectangle;
+import javax.swing.BorderFactory;
+import javax.swing.JPanel;
 
 /**
  *
@@ -12,10 +17,11 @@ import java.awt.Rectangle;
  */
 public class Mapa extends javax.swing.JFrame {
 
-    int limiteX = 15;
-    int limiteY = 10;
-    int lado = 48;
-    
+    int tamX;
+    int tamY;
+    int lado;
+    Casillero[][] casilleros;
+    herramientas.HerramientasVarias varias = new HerramientasVarias();
     
     
     /**
@@ -23,27 +29,70 @@ public class Mapa extends javax.swing.JFrame {
      */
     public Mapa() {
         initComponents();
-        dibujarMapa(limiteX,limiteY,lado);
+        //dibujarMapa(limiteX,limiteY,lado);
+        this.setSize(400, 100);
         
     }
     
+    public Mapa(int tamanio){
+        
+        
+        switch (tamanio) {
+            case 0:
+                tamX = 15;
+                tamY = 9;
+                lado = 48;
+                break;
+            case 1:
+                tamX = 25;
+                tamY = 15;
+                lado = 30;
+                break;
+
+            default:
+                throw new AssertionError();
+        }
+        
+        int dimX = (tamX*lado)+50;
+        int dimY = (tamY*lado)+10;
+        
+        //System.out.println("dim: "+dimX + "x" + dimY);
+        initComponents();
+        
+        //java.awt.Dimension dim = new Dimension(dimX, dimY);
+        dibujarMapa(tamX, tamY, lado);
+        setSize(dimY, dimX);
+        
+        pack();
+    }
     
     
     private void dibujarMapa(int limiteX, int limiteY, int lado){
+        this.casilleros = new Casillero[tamX][tamY];
         
+        JPanel areaJuego = new JPanel();
+        areaJuego.setLayout(null);
+        areaJuego.setBounds(0, 0, tamX*lado, tamY*lado);
+        areaJuego.setBorder(BorderFactory.createLineBorder(Color.yellow));
         
         for (int coordY = 0; coordY < limiteY; coordY++) {
             int y = (coordY==0)?(coordY):(coordY*lado);
             
             for (int coordX = 0; coordX < limiteX; coordX++) {
+                int valorCas = varias.alAzarEntre(1, 10);
+                
                 int x = (coordX==0)?(coordX):(coordX*lado);
                 
                 Rectangle limites = new Rectangle(x, y, lado, lado);
-                Casillero cas = new Casillero(limites);
-                this.getContentPane().add(cas);
+                
+                Casillero cas = new Casillero(limites,valorCas);
+                this.casilleros[coordX][coordY] = cas;
+                areaJuego.add(cas);
+
+                //this.getContentPane().add(cas);
             }
         }
-        
+        this.getContentPane().add(areaJuego);
         pack();
         
     }
@@ -57,7 +106,10 @@ public class Mapa extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
+        setLocation(new java.awt.Point(0, 0));
+        setPreferredSize(new java.awt.Dimension(0, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -70,7 +122,8 @@ public class Mapa extends javax.swing.JFrame {
             .addGap(0, 471, Short.MAX_VALUE)
         );
 
-        pack();
+        setSize(new java.awt.Dimension(743, 501));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
