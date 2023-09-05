@@ -69,8 +69,11 @@ public class Inicio extends javax.swing.JFrame {
         
         int seleccion = jcbMenuTamanio.getSelectedIndex();
         System.out.println("Elegido: " + seleccion);
-        Mapa mapa = new Mapa(seleccion);
-        mapa.setVisible(true);
+        //Mapa mapa = new Mapa(seleccion);
+        //mapa.setVisible(true);
+        
+        Mapa_2 m = new Mapa_2(800, 300);
+        m.setVisible(true);
     }//GEN-LAST:event_jButton1MouseClicked
 
     /**
