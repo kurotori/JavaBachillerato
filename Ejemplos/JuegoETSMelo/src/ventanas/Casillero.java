@@ -41,12 +41,12 @@ public class Casillero extends JPanel {
         
         lblImagen = new JLabel();
         lblImagen.setBounds(0, 0, lado, lado);
+        
         this.add(lblImagen);
         cambiarImagen();
     }
     
     public void cambiarImagen(){
-        
         String ruta = "/imagen/"+this.valor+".png";
         System.out.println(ruta);
         try {
@@ -60,8 +60,6 @@ public class Casillero extends JPanel {
             lblImagen.setIcon( new ImageIcon(img) );
             
         } catch (Exception e) {
-            cambiarImagen(0);
-            
             System.out.println("ERROR:" + e.getMessage());
         }
     }
