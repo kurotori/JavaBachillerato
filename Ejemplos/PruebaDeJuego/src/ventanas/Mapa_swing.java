@@ -36,7 +36,11 @@ public class Mapa_swing extends javax.swing.JFrame{
                 dimY = 15;
                 lado = 30;
             }
-
+            case 2 -> {
+                dimX = 42;
+                dimY = 25;
+                lado = 18;
+            }
             default -> throw new AssertionError();
         }
         
