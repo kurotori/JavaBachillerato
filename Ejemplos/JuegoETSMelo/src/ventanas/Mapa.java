@@ -4,99 +4,53 @@
  */
 package ventanas;
 
-import herramientas.HerramientasVarias;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Rectangle;
-import javax.swing.BorderFactory;
-import javax.swing.JPanel;
-
 /**
  *
- * @author luiss
+ * @author sebastian
  */
 public class Mapa extends javax.swing.JFrame {
 
-    int tamX;
-    int tamY;
-    int lado;
-    Casillero[][] casilleros;
-    herramientas.HerramientasVarias varias = new HerramientasVarias();
-    
-    
     /**
      * Creates new form Mapa
      */
     public Mapa() {
         initComponents();
-        //dibujarMapa(limiteX,limiteY,lado);
-        this.setSize(400, 100);
-        
+        dibujarMapa();
     }
-    
-    public Mapa(int tamanio){
-        
-        
-        switch (tamanio) {
-            case 0:
-                tamX = 15;
-                tamY = 9;
-                lado = 48;
-                break;
-            case 1:
-                tamX = 25;
-                tamY = 15;
-                lado = 30;
-                break;
 
-            default:
-                throw new AssertionError();
-        }
+    private void dibujarMapa(){
         
-        int dimX = (tamX*lado)+50;
-        int dimY = (tamY*lado)+10;
+        int x = 0;
+        int y = 0;
+        int limiteX = 8;
+        int limiteY = 5;
         
-        //System.out.println("dim: "+dimX + "x" + dimY);
-        initComponents();
-        
-        //java.awt.Dimension dim = new Dimension(dimX, dimY);
-        dibujarMapa(tamX, tamY, lado);
-        setSize(dimY, dimX);
-        
-        pack();
-    }
-    
-    
-    private void dibujarMapa(int limiteX, int limiteY, int lado){
-        this.casilleros = new Casillero[tamX][tamY];
-        
-        JPanel areaJuego = new JPanel();
-        areaJuego.setLayout(null);
-        areaJuego.setBounds(0, 0, tamX*lado, tamY*lado);
-        areaJuego.setBorder(BorderFactory.createLineBorder(Color.yellow));
-        
-        for (int coordY = 0; coordY < limiteY; coordY++) {
-            int y = (coordY==0)?(coordY):(coordY*lado);
-            
-            for (int coordX = 0; coordX < limiteX; coordX++) {
-                int valorCas = varias.alAzarEntre(1, 10);
+        for(int coordY = 0; coordY < limiteY; coordY++){
+            y = 0;
+            if (coordY != 0) {
+                y = coordY * 50;
+            }
+            for (int coordX = 0; coordX < limiteX; coordX++){
+                x = 0;
+                if (coordX != 0) {
+                    x = coordX * 50;
+                }
+                /*javax.swing.JPanel panel = new javax.swing.JPanel();
+                panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(20, 20, 20)));
+                panel.setMaximumSize(new java.awt.Dimension(50, 50));
+                panel.setMinimumSize(new java.awt.Dimension(50, 50));
+                panel.setPreferredSize(new java.awt.Dimension(50, 50));
+                panel.setBounds(x,y,50,50);*/
+                Casillero panel = new Casillero(11, 50, x, y);
+                this.getContentPane().add(panel);
                 
-                int x = (coordX==0)?(coordX):(coordX*lado);
-                
-                Rectangle limites = new Rectangle(x, y, lado, lado);
-                
-                Casillero cas = new Casillero(limites,valorCas);
-                this.casilleros[coordX][coordY] = cas;
-                areaJuego.add(cas);
-
-                //this.getContentPane().add(cas);
             }
         }
-        this.getContentPane().add(areaJuego);
-        pack();
         
+        
+        pack();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -106,24 +60,21 @@ public class Mapa extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        setLocation(new java.awt.Point(0, 0));
-        setPreferredSize(new java.awt.Dimension(0, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 733, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 471, Short.MAX_VALUE)
+            .addGap(0, 300, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(743, 501));
-        setLocationRelativeTo(null);
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     /**
