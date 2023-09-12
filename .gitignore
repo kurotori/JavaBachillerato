@@ -30,3 +30,6 @@ hs_err_pid*
 /VentanasEnJava/dist/
 */build
 /Ejemplos/ClienteServidorSimple/Fase1/ClienteServidor/nbproject/private/
+/Ejemplos/JFrameJPanelImagen/nbproject/private/
+/Ejemplos/JFrameJPanelImagen/build/
+/Ejemplos/PanelConImagen/nbproject/private/
