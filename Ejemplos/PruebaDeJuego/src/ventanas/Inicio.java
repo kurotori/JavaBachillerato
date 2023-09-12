@@ -74,6 +74,7 @@ public class Inicio extends javax.swing.JFrame {
 //        
         Mapa_swing coso = new Mapa_swing(seleccion);
         coso.setVisible(true);
+
     }//GEN-LAST:event_jButton1MouseClicked
 
     /**
