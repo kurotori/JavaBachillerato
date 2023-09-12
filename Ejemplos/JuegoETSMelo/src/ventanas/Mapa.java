@@ -4,12 +4,15 @@
  */
 package ventanas;
 
+import juegoetsmelo.Partida;
+
 /**
  *
  * @author sebastian
  */
 public class Mapa extends javax.swing.JFrame {
 
+    juegoetsmelo.Partida partida;
     /**
      * Creates new form Mapa
      */
@@ -24,6 +27,8 @@ public class Mapa extends javax.swing.JFrame {
         int y = 0;
         int limiteX = 8;
         int limiteY = 5;
+        
+        partida = new Partida(limiteX, limiteY);
         
         for(int coordY = 0; coordY < limiteY; coordY++){
             y = 0;
@@ -41,7 +46,8 @@ public class Mapa extends javax.swing.JFrame {
                 panel.setMinimumSize(new java.awt.Dimension(50, 50));
                 panel.setPreferredSize(new java.awt.Dimension(50, 50));
                 panel.setBounds(x,y,50,50);*/
-                Casillero panel = new Casillero(11, 50, x, y);
+                int valor = partida.casillero[coordX][coordY];
+                Casillero panel = new Casillero(valor, 50, x, y);
                 this.getContentPane().add(panel);
                 
             }
