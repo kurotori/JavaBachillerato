@@ -70,7 +70,7 @@ public class Mapa_swing extends javax.swing.JFrame{
             for (int posX = 0; posX < dimX; posX++) {
                 int x = (posX==0)? (0) : (posX*lado);
            
-                int valor = juego.valorDeCasillero(posX, posY,dimX);
+                int valor = juego.valorDeCasillero(posX, posY);
                 Casillero cas = new Casillero(valor,lado,x,y);
                 panelMapa.add(cas);
             }
