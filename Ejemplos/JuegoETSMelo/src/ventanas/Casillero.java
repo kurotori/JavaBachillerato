@@ -18,25 +18,27 @@ import javax.swing.ImageIcon;
  * @author sebastian
  */
 public class Casillero extends JPanel {
-    private int valor;
+    public int valor;
     private int lado;
     private int posX;
     private int posY;
+    public int coordX;
+    public int coordY;
     private JLabel lblImagen;
     
     public Casillero(int valor, int lado, 
-            int posX, int posY){
+            int posX, int posY, int coordX, int coordY){
         this.valor = valor;
         this.lado = lado;
         this.posX = posX;
         this.posY = posY;
+        this.coordX = coordX;
+        this.coordY = coordY;
         Rectangle limites = 
             new Rectangle(posX, posY, lado, lado);
         this.setBounds(limites);
         this.setBackground(Color.white);
-        this.setBorder(
-                BorderFactory.
-                    createLineBorder(Color.black));
+        
         this.setLayout(null);
         
         lblImagen = new JLabel();

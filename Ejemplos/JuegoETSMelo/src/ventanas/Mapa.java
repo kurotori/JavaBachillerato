@@ -4,6 +4,8 @@
  */
 package ventanas;
 
+import java.awt.Component;
+import java.util.ArrayList;
 import juegoetsmelo.Partida;
 
 /**
@@ -13,6 +15,8 @@ import juegoetsmelo.Partida;
 public class Mapa extends javax.swing.JFrame {
 
     juegoetsmelo.Partida partida;
+    Casillero[][] casilleros;
+    
     /**
      * Creates new form Mapa
      */
@@ -28,6 +32,8 @@ public class Mapa extends javax.swing.JFrame {
         int limiteX = 8;
         int limiteY = 5;
         
+        casilleros = new Casillero[limiteX][limiteY];
+        
         partida = new Partida(limiteX, limiteY);
         
         for(int coordY = 0; coordY < limiteY; coordY++){
@@ -40,21 +46,43 @@ public class Mapa extends javax.swing.JFrame {
                 if (coordX != 0) {
                     x = coordX * 50;
                 }
-                /*javax.swing.JPanel panel = new javax.swing.JPanel();
-                panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(20, 20, 20)));
-                panel.setMaximumSize(new java.awt.Dimension(50, 50));
-                panel.setMinimumSize(new java.awt.Dimension(50, 50));
-                panel.setPreferredSize(new java.awt.Dimension(50, 50));
-                panel.setBounds(x,y,50,50);*/
+                
                 int valor = partida.casillero[coordX][coordY];
-                Casillero panel = new Casillero(valor, 50, x, y);
+                Casillero panel = new Casillero(valor, 50, x, y,coordX,coordY);
                 this.getContentPane().add(panel);
                 
+                casilleros[coordX][coordY]=panel;
+                
+                panel.addMouseListener(
+                        
+                        new java.awt.event.MouseAdapter() {
+                            
+                            public void mouseClicked(java.awt.event.MouseEvent ev){
+                                
+                                moverPersonaje(ev);
+                            }
+                        }
+                );
             }
         }
         
         
         pack();
+    }
+    
+    private void moverPersonaje(java.awt.event.MouseEvent evento){
+        System.out.println("probando");
+        Component blanco = evento.getComponent();
+        Casillero cas = (Casillero) blanco;
+        
+        if (cas.valor == 1) {
+            casilleros[partida.posJ_X][partida.posJ_Y].cambiarImagen(1);
+            
+            partida.posJ_X = cas.coordX;
+            partida.posJ_Y = cas.coordY;
+            cas.cambiarImagen(0);
+        }
+        
     }
     
     /**

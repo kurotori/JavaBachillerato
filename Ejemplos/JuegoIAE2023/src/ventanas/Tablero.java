@@ -21,9 +21,9 @@ public class Tablero extends javax.swing.JFrame {
         this.setLayout(null);
         
         for (int y = 0; y < 15; y++) {
-            int coordY = (y * 48)-1;
+            int coordY = (y * 48)-2;
             for (int x = 0; x < 15; x++) {
-                int coordX = (x * 48)-1;
+                int coordX = (x * 48)-2;
                 Casillero cas = new Casillero(coordX, coordY, 48);
                 this.getContentPane().add(cas);
             }
