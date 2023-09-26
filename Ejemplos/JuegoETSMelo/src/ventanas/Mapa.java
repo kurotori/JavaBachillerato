@@ -75,13 +75,31 @@ public class Mapa extends javax.swing.JFrame {
         Component blanco = evento.getComponent();
         Casillero cas = (Casillero) blanco;
         
-        if (cas.valor == 1) {
-            casilleros[partida.posJ_X][partida.posJ_Y].cambiarImagen(1);
-            
-            partida.posJ_X = cas.coordX;
-            partida.posJ_Y = cas.coordY;
-            cas.cambiarImagen(0);
+        int destX = Math.abs(partida.posJ_X - cas.coordX);
+        int destY = Math.abs(partida.posJ_Y - cas.coordY);
+        
+        //if (    (destX==1 & destY==0)
+        //     || (destX==0 & destY==1)
+        //     || (destX==1 & destY==1)
+        //        ) {
+        if ((destX+destY)<3){    
+            if (cas.valor == 1) {
+                casilleros[partida.posJ_X][partida.posJ_Y].cambiarImagen(1);
+
+                partida.posJ_X = cas.coordX;
+                partida.posJ_Y = cas.coordY;
+                cas.cambiarImagen(0);
+            }
+            else{
+                
+            }
         }
+        else{
+            System.out.println("NO VALIDO");
+        }
+        
+        
+        
         
     }
     
