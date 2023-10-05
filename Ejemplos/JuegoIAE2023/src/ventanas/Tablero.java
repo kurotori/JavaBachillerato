@@ -20,15 +20,32 @@ public class Tablero extends javax.swing.JFrame {
         this.setSize(720, 750);
         this.setLayout(null);
         
-        for (int y = 0; y < 15; y++) {
-            int coordY = (y * 48)-2;
-            for (int x = 0; x < 15; x++) {
-                int coordX = (x * 48)-2;
-                Casillero cas = new Casillero(coordX, coordY, 48);
-                this.getContentPane().add(cas);
+        Casillero cas = null;
+        
+        for (int y = 0; y < 13; y++) {
+            int posY = (y * 48)-2;
+            
+            for (int x = 0; x < 13; x++) {
+                
+                int posX = (x * 48)-2;
+                
+                if ( !(x<5 && y<5) && !(x>7 && y>7)
+                  && !(x<5 && y>7) && !(x>7 && y<5)
+                   ) 
+                {
+                    cas = new Casillero(posX, posY,x,y, 48);
+                }
+                
+                if ( (x==0 && y==0) ) {
+                    
+                    cas = new Casillero(x, y,x,y, 48*5);
+                    
+                }
+                
+                if (cas != null) {
+                    this.getContentPane().add(cas);
+                }
             }
         }
-        
-        
     }
 }

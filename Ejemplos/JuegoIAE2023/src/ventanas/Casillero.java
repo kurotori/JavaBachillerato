@@ -14,16 +14,21 @@ import javax.swing.JPanel;
  */
 public class Casillero extends JPanel {
     
-    int x;
-    int y;
+    int posX;
+    int posY;
+    int coordX;
+    int coordY;
     int lado;
     
-    public Casillero(int x, int y, int lado){
+    public Casillero(
+            int posX, int posY, int coordX, int coordY, int lado){
         this.lado = lado;
-        this.x = x;
-        this.y = y;
+        this.posX = posX;
+        this.posY = posY;
+        this.coordX = coordX;
+        this.coordY = coordY;
         
-        this.setBounds(this.x, this.y, this.lado, this.lado);
+        this.setBounds(this.posX, this.posY, this.lado, this.lado);
         this.setBorder(BorderFactory.createLineBorder(Color.black, 1));
     }
     
