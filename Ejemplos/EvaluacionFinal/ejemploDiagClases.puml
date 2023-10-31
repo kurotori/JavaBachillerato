@@ -1,0 +1,88 @@
+@startuml EjemploDeDiagramaDeClases
+
+    'EJEMPLOS PARA DESARROLLAR DIAGRAMAS DE CLASE EN PLANTUML
+    '1 - Clases
+    'Las clases se declaran mediante el bloque class
+    'Los atributos se declaran mediante la sintaxis tipo:nombre
+    'Los métodos se declaran igual que los atributos, pero con un paréntesis luego del nombre
+    ' donde se agregan, además, los datos de entrada del método.
+
+    class ClaseA{
+        int:dato1
+        String:dato2
+        String:funcion1()
+        void:funcion2(String:dato)
+    }
+    
+    
+    'Accesibilidad
+    'La accesibilidad de métodos y atributos se pueden declarar mediante
+    ' los símbolos:
+    ' - para private
+    ' + para public
+    
+    class ClaseB{
+        +int:dato1
+        -String:dato2
+        +String:funcion1()
+        -void:funcion2(String:dato)
+    }
+    
+    
+    '2 - Paquetes
+    'Los paquetes se representan con el bloque package
+    'Las clases del paquete se declaran dentro de ese bloque
+    
+    package "Paquete1" {
+
+        class Clase1_1{
+
+        }
+
+        class Clase1_2{
+
+        }
+
+    }
+
+    'Se pueden vincular elementos entre paquetes sin problemas
+
+    package "Paquete2" {
+
+        class Clase2_1{
+
+        }
+
+        class Clase2_2{
+
+        }
+
+    }
+
+    Clase1_1 *-- Clase2_2
+    Clase2_1 --|> Clase1_2
+
+    '3 - Vínculos entre clases
+    'Composición
+    'La composición se representa con el símbolo *-- entre las clases vinculadas
+    'El asterisco va orientado hacia la clase que es compuesta con las otras
+
+    class Compo1{}
+    class Compo2{}
+    class Compo3{}
+
+    Compo1 *-- Compo2
+    Compo1 *-- Compo3
+
+    'Herencia
+    'La herencia se representa con el símbolo <|--
+    'La "flecha" apunta hacia la superclase
+
+    class Herencia1{}
+    class Herencia2{}
+    class Herencia3{}
+
+    Herencia1 <|-- Herencia2
+    Herencia1 <|-- Herencia3
+
+@enduml

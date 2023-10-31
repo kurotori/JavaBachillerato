@@ -4,25 +4,37 @@
  */
 package pkg03oct2023;
 
-import com.mysql.cj.jdbc.Driver;
-import java.sql.*;
-import com.sun.jdi.connect.spi.Connection;
 
-/**
- *
- * @author sebastian
- */
+import java.sql.*;
+import java.util.Scanner;
+
 public class Main {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
+        String dato="perro";
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection conexion = DriverManager.getConnection(url, user, password)
+            //Class.forName("com.mysql.jdbc.Driver");
+            Connection conexion = 
+                    DriverManager.getConnection(
+                            "jdbc:mysql://localhost:3306/pruebas",
+                            "estudiante", "estudiante");
+            String consulta = 
+                    "select * from datos where info=?";
+            
+            PreparedStatement sentencia = 
+                    conexion.prepareStatement(consulta);
+            sentencia.setString(1, dato);
+                    
+            ResultSet resultado = sentencia.executeQuery();
+            while (resultado.next()) {                
+                System.out.println(
+                        resultado.getInt(1) + " - " +
+                        resultado.getString(2));
+            }
+            conexion.close();
+            
         } catch (Exception e) {
+            System.out.println("ERROR:" + e.getMessage());
         }
     }
     
