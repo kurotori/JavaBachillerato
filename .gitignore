@@ -49,3 +49,4 @@ hs_err_pid*
 /Ejemplos/EvaluacionFinal/dist/
 Ejemplos/JuegoETSMelo/nbproject/private/private.properties
 Ejemplos/JuegoETSMelo/nbproject/private/private.xml
+*.properties
