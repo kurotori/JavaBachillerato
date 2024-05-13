@@ -1,3 +1,5 @@
+*/nbproject/*
+
 # Compiled class file
 *.class
 
@@ -45,3 +47,5 @@ hs_err_pid*
 /Ejemplos/EvaluacionFinal/nbproject/private/
 /Ejemplos/EvaluacionFinal/build/
 /Ejemplos/EvaluacionFinal/dist/
+Ejemplos/JuegoETSMelo/nbproject/private/private.properties
+Ejemplos/JuegoETSMelo/nbproject/private/private.xml
