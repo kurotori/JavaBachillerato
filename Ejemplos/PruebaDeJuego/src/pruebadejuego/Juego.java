@@ -12,28 +12,29 @@ import herramientas.HerramientasVarias;
  */
 public class Juego {
     
-    private int[] casilleros;
+    private int[][] casilleros;
     herramientas.HerramientasVarias varias = new HerramientasVarias();
     
     
     
     public Juego(int dimX,int dimY ){
         
-        casilleros = new int[dimX*dimY];
+        casilleros = new int[dimX][dimY];
         
-        for (int casN = 0; casN < dimX*dimY; casN++) {
-            
-                casilleros[casN]=varias.alAzarEntre(0, 10);
-            
+        for (int y = 0; y < dimY; y++) {
+            for (int x = 0; x < dimX; x++) {
+                casilleros[x][y]=varias.alAzarEntre(0, 10);
+            }
         }
         
-        casilleros[0]=0;
+        //Posición de Inicio del Jugador
+        casilleros[0][0]=11;
     }
 
     /**
      * @return the casilleros
      */
-    public int valorDeCasillero(int x, int y, int dimX) {
-       return casilleros[x+(y*dimX)];
+    public int valorDeCasillero(int x, int y) {
+       return casilleros[x][y];
     }
 }

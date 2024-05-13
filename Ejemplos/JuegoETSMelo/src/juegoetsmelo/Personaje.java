@@ -13,6 +13,7 @@ public class Personaje {
     private int vida;
     private int nivel;
     private int experiencia;
+    private Item[] equipaje = new Item[25];
     
     public Personaje(
             String nombre, int vida,

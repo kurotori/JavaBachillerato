@@ -14,16 +14,20 @@ public class Partida {
     
     herramientas.Varias varias = new Varias();
     public int[][] casillero;
-    
+    public int posJ_X=0;
+    public int posJ_Y=0;
     
     public Partida(int x, int y){
         this.casillero = new int[x][y];
         
-        for (int i = 0; i < y; i++) {
-            for (int j = 0; j < x; j++) {
-                casillero[j][i]=varias.alAzarEntre(0, 13);
+        for (int posY = 0; posY < y; posY++) {
+            
+            for (int posX = 0; posX < x; posX++) {
+                casillero[posX][posY]=varias.alAzarEntre(1, 11);
             }
         }
+        
+        this.casillero[0][0]=0;//Casillero de inicio del personaje
     }
     
 }
