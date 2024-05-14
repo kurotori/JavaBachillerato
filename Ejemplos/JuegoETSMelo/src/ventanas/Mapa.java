@@ -5,6 +5,7 @@
 package ventanas;
 
 import java.awt.Component;
+import java.awt.Dimension;
 import java.util.ArrayList;
 import juegoetsmelo.Partida;
 
@@ -16,11 +17,14 @@ public class Mapa extends javax.swing.JFrame {
 
     juegoetsmelo.Partida partida;
     Casillero[][] casilleros;
-    
+    Dimension tamVentana;
+    int limiteX = 20;
+    int limiteY = 10;
     /**
      * Creates new form Mapa
      */
     public Mapa() {
+        tamVentana = new Dimension((limiteX*51), (limiteY*54));
         initComponents();
         dibujarMapa();
     }
@@ -29,8 +33,8 @@ public class Mapa extends javax.swing.JFrame {
         
         int x = 0;
         int y = 0;
-        int limiteX = 8;
-        int limiteY = 5;
+        
+        
         
         casilleros = new Casillero[limiteX][limiteY];
         
@@ -70,6 +74,10 @@ public class Mapa extends javax.swing.JFrame {
         pack();
     }
     
+    /**
+     * Método para mover al personaje
+     * @param evento 
+     */
     private void moverPersonaje(java.awt.event.MouseEvent evento){
         System.out.println("probando");
         Component blanco = evento.getComponent();
@@ -114,6 +122,7 @@ public class Mapa extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        setPreferredSize(this.tamVentana);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

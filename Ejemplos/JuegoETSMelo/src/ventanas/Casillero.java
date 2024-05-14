@@ -26,8 +26,20 @@ public class Casillero extends JPanel {
     public int coordY;
     private JLabel lblImagen;
     
-    public Casillero(int valor, int lado, 
-            int posX, int posY, int coordX, int coordY){
+    /**
+     * Crea un casillero del juego
+     * @param valor
+     * @param lado
+     * @param posX
+     * @param posY
+     * @param coordX
+     * @param coordY 
+     */
+    public Casillero(
+            int valor, int lado, 
+            int posX, int posY, 
+            int coordX, int coordY
+    ){
         this.valor = valor;
         this.lado = lado;
         this.posX = posX;
