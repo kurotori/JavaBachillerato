@@ -1,0 +1,30 @@
+@startuml Bang
+
+class jugador{}
+
+class cañon{
+    angulo
+    inclinacion
+    turno
+}
+
+class proyectil{
+    potencia
+    distEfectiva
+    dañoColateral
+}
+
+class base{
+    ubicacion_y
+    ubicacion_x
+    puntosVida
+    resistencia
+}
+
+jugador "1" *-l- "n" cañon
+jugador "1" *-- "1" base
+jugador "1" *-- "n" proyectil
+cañon "1" *-- "0..5" proyectil
+
+
+@enduml
