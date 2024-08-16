@@ -7,6 +7,7 @@ package mensajero2.red;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -27,12 +28,34 @@ public class Servidor {
     private static int TOPE_POZO_DE_HILOS = 10;
     private ExecutorService pozoDeHilos;
     
-    private ServerSocket socketServidor;
+    /**
+     * Lee una propiedad de 
+     * @param propiedad
+     * @return 
+     */
+    private String leerConfiguración(String propiedad, String archivoIni){
+        String valor = "";
+        try {
+            Properties propiedades = new Properties();
+            FileInputStream archivoConfig = new FileInputStream(archivoIni);//("servidor.ini");
+            propiedades.load(archivoConfig);
+            valor = propiedades.getProperty(propiedad);
+        } catch (Exception e) {
+        }
+        
+        
+        return valor;
+    }
+    
     
     /**
      * Creación del Servidor con el pozo de hilos
      */
     public Servidor(){
+        try {
+            
+        } catch (Exception e) {
+        }
         //Inicialización del pozo de hilos con la cantidad de hilos establecida
         this.pozoDeHilos = Executors.newFixedThreadPool(TOPE_POZO_DE_HILOS);
         
@@ -57,6 +80,7 @@ public class Servidor {
             System.out.println("Puerto:" + puerto);
             
             Servidor servidor = new Servidor();
+            servidor.iniciar();
             
             
         } catch (IOException error) {
@@ -68,20 +92,22 @@ public class Servidor {
      * Arranque del servidor
      */
     public void iniciar(){
-        try {
-            socketServidor = new ServerSocket(puerto);
+        try (ServerSocket socketServidor = new ServerSocket(puerto)){
+             System.out.println("Iniciando el servidor en el puerto " + puerto);
+             while (true) {                
+                Socket socketCliente = socketServidor.accept();
+                 System.out.println("Se ha conectado un cliente al sistema");
+                 //pozoDeHilos.submit(n)
+                 GestorDeClientes gestorCliente = new GestorDeClientes(socketCliente);
+                 pozoDeHilos.submit(gestorCliente);
+                 
+            }
             
             
-        } catch (Exception e) {
+        } catch (IOException e) {
+            System.out.println("ERROR: "+ e.getMessage());
         }
     }
-    
-    //
-    //private Socket socketCliente;
-    
-     
-    private BufferedReader entrada;
-    private PrintWriter salida;
     
     
 }
