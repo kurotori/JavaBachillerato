@@ -50,3 +50,7 @@ hs_err_pid*
 Ejemplos/JuegoETSMelo/nbproject/private/private.properties
 Ejemplos/JuegoETSMelo/nbproject/private/private.xml
 *.properties
+/PruebaMAven/target/
+/Mensajero/target/
+/Mensajero2/dist/
+/EjemplosPrimeroBP/EjemploBase/nbproject/private/

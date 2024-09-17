@@ -2,20 +2,21 @@
 package ventanas;
 
 import java.awt.Dimension;
+import javax.swing.JFrame;
 
 /**
  *
  * @author Luis Sebastián de los Ángeles
  */
-public class Ventana extends javax.swing.JFrame{
+public class Ventana {
     
     /**
      * Método para inicializar los componentes de la ventana
      */
-    private void iniciarComponentes(){
+    private void iniciarComponentes(JFrame ventana){
         
         //Acción al cerrar la ventana
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         //Determinación del tamaño inicial de la ventana:
         //1 - Dimensiones establecidas
