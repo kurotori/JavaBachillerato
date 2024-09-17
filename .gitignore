@@ -1,4 +1,4 @@
-*/nbproject/*
+
 
 # Compiled class file
 *.class
@@ -50,3 +50,8 @@ hs_err_pid*
 Ejemplos/JuegoETSMelo/nbproject/private/private.properties
 Ejemplos/JuegoETSMelo/nbproject/private/private.xml
 *.properties
+/ManejoDeSwing2/dist/
+/Mensajero2/nbproject/private/
+/Mensajero2/dist/
+/Solitario/nbproject/private/
+/Solitario/dist/

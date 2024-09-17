@@ -1,0 +1,40 @@
+@startuml Servidor_multihilos
+class Servidor {
+  - puerto : int
+  - TOPE_POZO_DE_HILOS : int
+  - pozoDeHilos : ExecutorService
+  + leerConfiguracion(propiedad: String, archivoIni: String, valorDescarte: String) : String
+  + iniciar()
+}
+
+class GestorDeClientes {
+  - socketCliente : Socket
+  + GestorDeClientes(conexionCliente: Socket)
+  + run()
+}
+
+
+class Properties {
+  + getProperty(key: String) : String
+  + load(inputStream: InputStream) : void
+}
+
+class ServerSocket {
+  + accept() : Socket
+}
+
+class Socket {}
+class InputStreamReader {}
+class BufferedReader {}
+class PrintWriter {}
+
+Servidor *-- Properties : utiliza
+Servidor o-- GestorDeClientes : crea
+ServerSocket o-- Socket : crea
+GestorDeClientes o-l- Socket : utiliza
+GestorDeClientes o-d- InputStreamReader : utiliza
+GestorDeClientes o-d- BufferedReader : utiliza
+GestorDeClientes o-d- PrintWriter : utiliza
+
+
+@enduml
