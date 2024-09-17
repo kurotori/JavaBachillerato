@@ -1,0 +1,32 @@
+@startuml ClienteServidorSimple
+
+package Red {
+
+    class Servidor {
+        - ServerSocket conexionServidor
+        - Socket conexionCliente
+        - BufferedReader entrada
+        - PrintWriter salida
+        
+        + void iniciar(int puerto)
+        + void main()
+    }
+
+    class Cliente {
+        - Socket conexion
+        - PrintWriter salida
+        - BufferedReader entrada
+
+        + void IniciarConexion(String ip, int puerto, String nombre)
+        + String enviarMensaje(String mensaje)
+        + void cerrarConexion()
+    }
+
+    ' Relaciones entre los objetos de las clases
+    Servidor::conexionCliente <-l-> Cliente::conexion
+    Servidor::entrada <.. Cliente::salida
+    Servidor::salida ..> Cliente::entrada
+
+}
+
+@enduml

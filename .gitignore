@@ -1,4 +1,4 @@
-*/nbproject/*
+
 
 # Compiled class file
 *.class
@@ -54,3 +54,8 @@ Ejemplos/JuegoETSMelo/nbproject/private/private.xml
 /Mensajero/target/
 /Mensajero2/dist/
 /EjemplosPrimeroBP/EjemploBase/nbproject/private/
+/ManejoDeSwing2/dist/
+/Mensajero2/nbproject/private/
+/Mensajero2/dist/
+/Solitario/nbproject/private/
+/Solitario/dist/
