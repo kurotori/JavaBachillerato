@@ -21,7 +21,7 @@ public class Mensaje {
     public int tipo;
     
     // TIPOS DE MENSAJES
-    public static int MENSAJE_DE_ESTADO = 3000;
+    public static int MENSAJE_DE_CONTROL = 3000;
     public static int MENSAJE_DE_ESTADO_CAMBIAR_NOMBRE = 3001;
     public static int MENSAJE_DEL_SERVIDOR = 3002;
     public static int MENSAJE_GENERAL = 3003;

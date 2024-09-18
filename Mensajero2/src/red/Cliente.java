@@ -79,7 +79,7 @@ public class Cliente {
             entrada = new BufferedReader(lectorDeEntrada);
             salida = new PrintWriter(escritorDeSalida,true);
             
-            GestorDeMensajesDelCliente gestor = new GestorDeMensajesDelCliente(salida);
+            GestorDeMensajesDelCliente gestor = new GestorDeMensajesDelCliente(salida,usuario);
             
             new Thread(gestor).start();
             
@@ -89,8 +89,8 @@ public class Cliente {
                     ) {
                 
                 Mensaje recibido = JSON.jsonAMensaje(respuesta);
-                interpretarMensaje(recibido);
-                //System.out.println(respuesta);
+                interpretarMensajeRecibido(recibido);
+                
             }
             
             
@@ -110,6 +110,10 @@ public class Cliente {
         return conexion;
     }
     
+    /**
+     * 
+     * @param args 
+     */
     public static void main(String[] args) {
         Scanner teclado = new Scanner(System.in);
         System.out.print("Ingrese la IP del servidor: ");
@@ -125,7 +129,7 @@ public class Cliente {
      * Permite interpretar el mensaje recibido
      * @param msj 
      */
-    public static void interpretarMensaje(Mensaje msj){
+    public void interpretarMensajeRecibido(Mensaje msj){
         
         System.out.println();
         switch (msj.tipo) {
@@ -149,6 +153,25 @@ public class Cliente {
                         msj.usuario_nombre +" : "+
                         msj.mensaje
                 );
+                break;
+            case 3000: //Mensaje de control / comando
+                String[] comando = msj.mensaje.split(":");
+                System.out.println("comando 0 : " + comando[0]);
+                System.out.println("comando 1 : " + comando[1]);
+                switch (comando[0]) {
+                    case "nombreU":
+                        System.out.println("comando nombreU");
+                        this.usuario = new Usuario(comando[1]);
+                        Notificaciones.mostrarEventoConsola(
+                                "Identificado temporalmente como " +
+                                this.usuario.getNombre()
+                                        );
+                        break;
+                        
+                    default:
+                        throw new AssertionError();
+                }
+                
                 break;
             default:
                 System.out.println("No detallado");

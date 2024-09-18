@@ -154,6 +154,24 @@ public class Servidor {
     }
     
     /**
+     * Permite al servidor enviarle un mensaje a un usuario específico
+     * @param msj 
+     * @param tipo
+     * @param receptor
+     */
+    public void enviarMensajeAUsuarioSRV(String msj, int tipo, Usuario receptor){
+        UUID idReceptor = receptor.getId();
+        
+        for (Cliente cliente : clientes) {
+            if ( cliente.getUsuario().getId().equals(idReceptor) ) {
+                Mensaje mensaje = new Mensaje(this.clServidor.getUsuario(), msj, tipo);
+                String datoAEnviar = JSON.mensajeAJSON(mensaje);
+                cliente.obtenerSalida().println(datoAEnviar);
+            }
+        }
+    }
+    
+    /**
      * Permite enviar un mensaje de un usuario a otro usuario específico
      * @param mensaje
      * @param emisor
