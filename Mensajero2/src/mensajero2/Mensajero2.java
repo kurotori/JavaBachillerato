@@ -6,7 +6,7 @@ package mensajero2;
 
 import red.Servidor;
 import red.Cliente;
-import mensajero2.herramientas.Mensaje;
+import herramientas.Mensaje;
 
 /**
  *

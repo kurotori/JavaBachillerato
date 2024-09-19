@@ -1,4 +1,4 @@
-package mensajero2.herramientas;
+package herramientas;
 
 /**
  *

@@ -11,9 +11,9 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 import mensajero2.Usuario;
-import mensajero2.herramientas.JSON;
-import mensajero2.herramientas.Notificaciones;
-import mensajero2.herramientas.Mensaje;
+import herramientas.JSON;
+import herramientas.Notificaciones;
+import herramientas.Mensaje;
 
 /**
  *
@@ -70,15 +70,19 @@ public class Cliente {
      */
     public void iniciar(){
         try {
+            //Se abre la conexión utilizando los datos provistos por el método constructor
             conexion = new Socket(ipServidor,puerto);
+            
             Notificaciones.mostrarEventoConsola("Conectado al servidor en " + ipServidor);
             
+            //Inicializamos los objetos para el envío y la recepción de solicitudes
             InputStreamReader lectorDeEntrada = new InputStreamReader(conexion.getInputStream());
             OutputStreamWriter escritorDeSalida = new OutputStreamWriter(conexion.getOutputStream());
             
             entrada = new BufferedReader(lectorDeEntrada);
             salida = new PrintWriter(escritorDeSalida,true);
             
+            //Declaramos un objeto gestor para manejar el envío de mensajes del cliente
             GestorDeMensajesDelCliente gestor = new GestorDeMensajesDelCliente(salida,usuario);
             
             new Thread(gestor).start();

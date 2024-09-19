@@ -16,10 +16,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import mensajero2.Usuario;
-import mensajero2.herramientas.JSON;
-import mensajero2.herramientas.Notificaciones;
-import mensajero2.herramientas.Propiedades;
-import mensajero2.herramientas.Mensaje;
+import herramientas.JSON;
+import herramientas.Notificaciones;
+import herramientas.Propiedades;
+import herramientas.Mensaje;
 
 /**
  *
