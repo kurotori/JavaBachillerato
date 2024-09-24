@@ -242,4 +242,15 @@ public class Servidor {
         }
         System.out.println("Servidor detenido.");
     }
+
+    /**
+     * Permite obtener el 'perfil público' del servidor
+     * @return 
+     */
+    public Cliente getClServidor() {
+        return clServidor;
+    }
+    
+    
+    
 }
