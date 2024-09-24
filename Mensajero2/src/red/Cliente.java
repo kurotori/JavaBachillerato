@@ -14,6 +14,7 @@ import mensajero2.Usuario;
 import herramientas.JSON;
 import herramientas.Notificaciones;
 import herramientas.Mensaje;
+import ventanas.ClientePrincipal;
 
 /**
  *
@@ -22,10 +23,11 @@ import herramientas.Mensaje;
 public class Cliente {
     private Usuario usuario;
     private String ipServidor;
+    private int puerto;
     private Socket conexion;
     private PrintWriter salida;
     private BufferedReader entrada;
-    private int puerto;
+    
     
     /**
      * Método constructor para su uso desde el servidor
@@ -83,19 +85,24 @@ public class Cliente {
             salida = new PrintWriter(escritorDeSalida,true);
             
             //Declaramos un objeto gestor para manejar el envío de mensajes del cliente
-            GestorDeMensajesDelCliente gestor = new GestorDeMensajesDelCliente(salida,usuario);
+            GestorDeMensajesDelCliente gestorSale = new GestorDeMensajesDelCliente(salida,usuario);
             
-            new Thread(gestor).start();
+           
+            //Creamos y abrimos la ventana principal
+            ClientePrincipal principal = new ClientePrincipal(entrada, gestorSale);
+            principal.setVisible(true);
             
-            String respuesta;
-            while (
-                    (respuesta = entrada.readLine()) != null
-                    ) {
-                
-                Mensaje recibido = JSON.jsonAMensaje(respuesta);
-                interpretarMensajeRecibido(recibido);
-                
-            }
+            //new Thread(gestor).start();
+            
+//            String respuesta;
+//            while (
+//                    (respuesta = entrada.readLine()) != null
+//                    ) {
+//                
+//                Mensaje recibido = JSON.jsonAMensaje(respuesta);
+//                interpretarMensajeRecibido(recibido);
+//                
+//            }
             
             
         } catch (Exception e) {
@@ -129,57 +136,5 @@ public class Cliente {
         teclado.close();
     }
     
-    /**
-     * Permite interpretar el mensaje recibido
-     * @param msj 
-     */
-    public void interpretarMensajeRecibido(Mensaje msj){
-        
-        System.out.println();
-        switch (msj.tipo) {
-            case 3004: //Mensaje directo al usuario
-                System.out.println(
-                        msj.marcaDeTiempo + " > "+
-                        msj.usuario_nombre +" me dice:  "+
-                        msj.mensaje
-                );
-                break;
-            case 3003: //Mensaje General
-                System.out.println(
-                        msj.marcaDeTiempo + " > "+
-                        msj.usuario_nombre +" :  "+
-                        msj.mensaje
-                );
-                break;
-            case 3002: //Mensaje del Servidor
-                System.out.println(
-                        msj.marcaDeTiempo + " SRV > "+
-                        msj.usuario_nombre +" : "+
-                        msj.mensaje
-                );
-                break;
-            case 3000: //Mensaje de control / comando
-                String[] comando = msj.mensaje.split(":");
-                System.out.println("comando 0 : " + comando[0]);
-                System.out.println("comando 1 : " + comando[1]);
-                switch (comando[0]) {
-                    case "nombreU":
-                        System.out.println("comando nombreU");
-                        this.usuario = new Usuario(comando[1]);
-                        Notificaciones.mostrarEventoConsola(
-                                "Identificado temporalmente como " +
-                                this.usuario.getNombre()
-                                        );
-                        break;
-                        
-                    default:
-                        throw new AssertionError();
-                }
-                
-                break;
-            default:
-                System.out.println("No detallado");
-        }
-    }
 }
 

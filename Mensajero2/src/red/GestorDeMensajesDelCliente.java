@@ -15,7 +15,7 @@ import herramientas.Mensaje;
  *
  * @author sebastian
  */
-public class GestorDeMensajesDelCliente implements Runnable {
+public class GestorDeMensajesDelCliente {
 
     private PrintWriter salida;
     private Usuario usuario;
@@ -25,51 +25,66 @@ public class GestorDeMensajesDelCliente implements Runnable {
         this.usuario = usuario;
     }
 
-    @Override
-    public void run() {
-        InputStreamReader lectorDeEntrada = new InputStreamReader(System.in);
-        BufferedReader lectorDeConsola = new BufferedReader(lectorDeEntrada);
+    /**
+     * Interpreta el mensaje ingresado por el usuario y lo prepara para ser
+     * enviado
+     *
+     * @param mensaje
+     */
+    private Mensaje interpretarMensaje(String mensaje) {
 
-        try {
-            String entradaUsuario;
-            
-            while (
-                    (entradaUsuario = lectorDeConsola.readLine()
-                    ) != null
-                    ) {
-                System.out.println(entradaUsuario);
-                //interpretarMensajeAEnviar(entradaUsuario);
-                salida.println(entradaUsuario); //El dato se envía al servidor
-            }
-        } catch (Exception error) {
-            System.out.println("ERROR:" + error.getLocalizedMessage());
-            error.printStackTrace();
-            
-        }
-    }
-
-    private void interpretarMensajeAEnviar(String mensaje) {
-        if (mensaje==null) {
-            System.out.println("es null");
-        }
         Mensaje msj = null;
+        int tipo = 0;
+
+        //Extraemos el primer caracter del mensaje
         char caracter = mensaje.charAt(0);
-        String datos = mensaje.substring(1, mensaje.length() - 1);
-        //Mensaje directo a usuario
+        //Obtenemos 
+        String cuerpo = mensaje.substring(1, mensaje.length() - 1);
+        //Procesamos el mensaje
         switch (caracter) {
             case '@':
-                msj = new Mensaje(usuario, datos, Mensaje.MENSAJE_DIRECTO_A_OTRO_USUARIO);
+                tipo = Mensaje.MENSAJE_DIRECTO_A_OTRO_USUARIO;
+                //msj = new Mensaje(usuario, cuerpo, Mensaje.MENSAJE_DIRECTO_A_OTRO_USUARIO);
                 break;
             case ':':
-                msj = new Mensaje(usuario, datos, Mensaje.MENSAJE_AL_SERVIDOR);
+                tipo = Mensaje.MENSAJE_AL_SERVIDOR;
+                //msj = new Mensaje(usuario, cuerpo, Mensaje.MENSAJE_AL_SERVIDOR);
                 break;
             default:
-                System.out.println("Caso por descarte");
-                msj = new Mensaje(usuario, datos, Mensaje.MENSAJE_GENERAL);
-                
+                tipo = Mensaje.MENSAJE_GENERAL;
+            //System.out.println("Caso por descarte");
+            //msj = new Mensaje(usuario, cuerpo, Mensaje.MENSAJE_GENERAL);
+
         }
-        String m = JSON.mensajeAJSON(msj);
-        System.out.println("Enviando " + m);
-        salida.println(m);
+
+        //Creamos el mensaje
+        msj = new Mensaje(usuario, cuerpo, tipo);
+
+        return msj;
+    }
+
+    /**
+     * Envía el mensaje al servidor
+     *
+     * @param mensaje
+     */
+    public void enviarMensaje(String mensaje) {
+        //analizamos los datos de entrada para evitar mensajes vacíos
+        if ((mensaje != null) && !(mensaje.trim().isEmpty())) {
+
+            //Analizamos y convertimos el mensaje
+            Mensaje msj = interpretarMensaje(mensaje);
+
+            //Obtenemos el string JSON para enviar
+            String dato = JSON.mensajeAJSON(msj);
+
+            //Enviamos el mensaje
+            try {
+                salida.println(msj);
+                salida.flush();
+            } catch (Exception error) {
+                error.printStackTrace();
+            }
+        }
     }
 }

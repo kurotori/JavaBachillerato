@@ -4,6 +4,8 @@
  */
 package ventanas;
 
+import red.Cliente;
+
 /**
  *
  * @author sebastian
@@ -96,7 +98,8 @@ public class ClienteInicio extends javax.swing.JFrame {
         String ipServidor = txtIpServidor.getText();
         int puerto = Integer.parseInt(txtPuerto.getText());
         
-        
+        Cliente cliente = new Cliente(ipServidor, puerto);
+        cliente.iniciar();
     }//GEN-LAST:event_btnIniciarSesionMouseClicked
 
     /**
