@@ -6,18 +6,20 @@ package ventanas;
 
 import java.io.BufferedReader;
 import java.io.PrintWriter;
+import mensajero2.Usuario;
 import red.GestorDeMensajesDelCliente;
 import red.GestorDeMensajesDelServidor;
+import red.Cliente;
 
 /**
  *
  * @author sebastian
  */
 public class ClientePrincipal extends javax.swing.JFrame {
-
-    BufferedReader entrada;
-    GestorDeMensajesDelCliente mensajesSalida;
-    GestorDeMensajesDelServidor mensajesEntrada;
+    private Cliente cliente;
+    private BufferedReader entrada;
+    private GestorDeMensajesDelCliente mensajesSalida;
+    private GestorDeMensajesDelServidor mensajesEntrada;
     /**
      * Creates new form ClientePrincipal
      */
@@ -26,8 +28,10 @@ public class ClientePrincipal extends javax.swing.JFrame {
     }
     
     public ClientePrincipal(
+            Cliente cliente,
             BufferedReader entrada,
             GestorDeMensajesDelCliente gestorSale){
+        this.cliente = cliente;
         this.mensajesSalida = gestorSale;
         this.entrada = entrada;
         
@@ -39,12 +43,22 @@ public class ClientePrincipal extends javax.swing.JFrame {
         
         
     }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    
     
     public void agregarMensaje(String usuario, String mensaje){
         txtpMensajes.setText(
                 txtpMensajes.getText() + "\n"+
                 usuario + ": " + mensaje
         );
+    }
+    
+    public void enviarMensaje(String mensaje){
+        this.mensajesSalida.enviarMensaje(mensaje);
     }
 
     /**

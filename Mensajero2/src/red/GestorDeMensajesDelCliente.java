@@ -12,7 +12,7 @@ import herramientas.JSON;
 import herramientas.Mensaje;
 
 /**
- *
+ *  Permite que el cliente envíe solicitudes al Servidor
  * @author sebastian
  */
 public class GestorDeMensajesDelCliente {
@@ -46,7 +46,7 @@ public class GestorDeMensajesDelCliente {
                 tipo = Mensaje.MENSAJE_DIRECTO_A_OTRO_USUARIO;
                 //msj = new Mensaje(usuario, cuerpo, Mensaje.MENSAJE_DIRECTO_A_OTRO_USUARIO);
                 break;
-            case ':':
+            case ':': //Permite enviar comandos al servidor
                 tipo = Mensaje.MENSAJE_AL_SERVIDOR;
                 //msj = new Mensaje(usuario, cuerpo, Mensaje.MENSAJE_AL_SERVIDOR);
                 break;

@@ -23,6 +23,7 @@ import ventanas.ClientePrincipal;
 public class Cliente {
     private Usuario usuario;
     private String ipServidor;
+    private String nombreServidor;
     private int puerto;
     private Socket conexion;
     private PrintWriter salida;
@@ -30,7 +31,7 @@ public class Cliente {
     
     
     /**
-     * Método constructor para su uso desde el servidor
+     * Método constructor para representar clientes conectados en el servidor
      * @param salida
      * @param usuario
      * @param conexion 
@@ -43,7 +44,8 @@ public class Cliente {
     }
     
     /**
-     * Método constructor para el cliente simbólico que representa al Servidor
+     * Método constructor para establecer el 'perfil público' del servidor
+     * @param servidor 
      */
     public Cliente (String servidor){
         this.salida = null;
@@ -52,7 +54,7 @@ public class Cliente {
     }
     
     /**
-     * Método constructor principal 
+     * Método constructor principal usado por los clientes al conectarse
      * @param salida
      * @param usuario
      * @param conexion
@@ -89,7 +91,8 @@ public class Cliente {
             
            
             //Creamos y abrimos la ventana principal
-            ClientePrincipal principal = new ClientePrincipal(entrada, gestorSale);
+            ClientePrincipal principal = new ClientePrincipal(this, entrada, gestorSale);
+            principal.setTitle(ipServidor);
             principal.setVisible(true);
             
             //new Thread(gestor).start();
@@ -117,24 +120,26 @@ public class Cliente {
         return usuario;
     }
 
+    public String getNombreServidor() {
+        return nombreServidor;
+    }
+    
+    public void actualizarUsuario(String nombre){
+        if (this.usuario==null) {
+            this.usuario = new Usuario(nombre);
+        }
+        else{
+            this.usuario.setNombre(nombre);
+        }
+    }
+
     public Socket obtenerConexion() {
         return conexion;
     }
     
-    /**
-     * 
-     * @param args 
-     */
-    public static void main(String[] args) {
-        Scanner teclado = new Scanner(System.in);
-        System.out.print("Ingrese la IP del servidor: ");
-        String ipServidor = teclado.nextLine();
-        System.out.print("Ingrese el puerto del servidor: ");
-        int puerto = teclado.nextInt();
-        Cliente cliente = new Cliente(ipServidor, puerto);
-        cliente.iniciar();
-        teclado.close();
-    }
+    public void actrualizarNombreServidor(String nombre){
+        this.nombreServidor = nombre;
+    } 
     
 }
 
