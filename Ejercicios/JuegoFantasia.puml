@@ -1,0 +1,49 @@
+@startuml JuegoFantasia
+
+
+Class Juego{
+    +crearUsuario():Usuario
+    +iniciarJuego(usuario:Usuario)
+}
+
+Class Jugador{
+    -nombre:String
+    -contraseña:String
+    +verNombre():String
+    +cambiarNombre(nombreNuevo:String, contraseña:String):void
+    +cambiarContraseña(actual:String, nueva:String):void
+    +crearPersonaje():Personaje
+    +crearPartida():Partida
+    +unirseA(partida:Partida):void
+}
+
+Class Partida{
+    -id:int
+    +verId():int
+}
+
+Class Personaje{
+    -id:int
+    -nombre:String
+    -raza:String
+    -oficio:String
+    -nivel:int
+    +hablar(personaje:Personaje)
+    +irHacia(direccion:int)
+    +guardarEnEquipamiento(objeto:Objeto)
+    +usar(objeto:Objeto)
+}
+
+Class Objeto{
+    -id:int
+    -nombre:String
+    -tipo:String
+    -rareza:int
+    -efecto:String
+    +verDatos():String
+}
+
+Juego "1" *-- "4" Jugador
+Jugador ""
+
+@enduml

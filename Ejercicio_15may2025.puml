@@ -1,0 +1,30 @@
+@startuml Ejercicio_15may2025
+
+class Partida{
+}
+
+Class Jugador{
+    color:String
+}
+
+Class Tablero{
+}
+
+Class Casillero{
+    numero:int
+    tipo:String
+    ocupado:boolean
+}
+
+Class Ficha{
+    id:int
+}
+
+Partida "1" *-r- "2..4" Jugador:< Participan
+Partida "1" *-r- "1" Tablero:Usa >
+Jugador "1" *-- "4" Ficha:Tiene >
+Tablero "1" *-- "72" Casillero:FormadoPor >
+Casillero "1" *-l- "0..1" Ficha: Contiene > 
+ 
+
+@enduml

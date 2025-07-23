@@ -1,0 +1,55 @@
+@startuml Ejercicio2_15may2025
+
+    Class Usuario{
+        id:int
+        nombre:String
+        apellido:String
+        email:String
+        contraseña:String
+        fechaNacimiento:String
+    }
+
+    Class Direccion{
+        id:int
+        país:String
+        localidad:String
+        cod_postal:int
+        calle_1:String
+        calle_2:String
+        num_casa:int
+    }
+
+    Class Pedido{
+    }
+
+    Class Producto{
+        sku:String
+        tipo:String
+        nombre:String
+        precio:float
+        descripción:String
+    }
+
+    Class Valoración{
+        valoración:int
+        mensaje:String
+    }
+
+    Class Tienda{
+        id:int
+        nombre:String
+        descripción:String
+        categoría:String
+    }
+
+    Usuario "1" *-- "4" Direccion: Tiene >
+    Usuario "1" *-- "10" Pedido: Realiza >
+    Pedido "1" *-- "10" Producto: Contiene >
+    Pedido "1" *-- "1" Direccion: Enviado_A >
+    Producto "1" *-r- "100" Valoración: Recibe >
+    Usuario "1" *-- "100" Valoración: Realiza >
+    Tienda "1" *-- "1000" Producto: Vende >
+    Usuario "1" *-- "0..5" Tienda: Posee > 
+
+
+@enduml

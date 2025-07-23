@@ -1,0 +1,25 @@
+@startuml carpetas_proyecto
+
+!include <tupadr3/common>
+!include <tupadr3/font-awesome/folder>
+!include <tupadr3/font-awesome/file>
+!include <tupadr3/font-awesome/archive>
+
+skinparam defaultTextAlignment center
+
+package "Mi_Proyecto_en_Java" {
+    package "src" {
+        0000022300000000000000#LightBlue
+    }
+    
+    package "bin" {
+        FA_FILE(class_file, "App.class") #LightGreen
+    }
+    
+    package "lib" {
+        FA_ARCHIVE(jar_file, "App.jar") #LightYellow
+    }
+}
+
+@enduml
+

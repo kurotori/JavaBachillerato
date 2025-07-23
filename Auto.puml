@@ -1,0 +1,25 @@
+@startuml Auto
+
+    Class Auto{
+        fabricante:String
+        modelo:String
+        año:int
+    }
+
+    Class Motor{
+        cilindros:int
+        cilindrada:int
+        potencia:int
+    }
+
+    Class Rueda{
+        rodado:int
+        ancho:int
+    }
+
+    Auto "1" *-- "1" Motor
+    Auto "1" *-- "4..5" Rueda
+
+
+
+@enduml
