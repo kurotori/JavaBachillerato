@@ -42,6 +42,24 @@ public class Inicio extends JFrame{
 
         repaint();
 
+        addMouseMotionListener(
+            new MouseMotionListener() {
+
+                @Override
+                public void mouseDragged(MouseEvent e) {
+                    // TODO Auto-generated method stub
+                    
+                }
+
+                @Override
+                public void mouseMoved(MouseEvent e) {
+                    // TODO Auto-generated method stub
+                    System.out.println(e.getX() + "," + e.getY());
+                }
+                   
+            }
+        );
+
         addKeyListener(
             new KeyListener() {
                 @Override
