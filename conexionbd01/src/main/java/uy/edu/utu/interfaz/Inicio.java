@@ -29,12 +29,10 @@ public class Inicio extends JFrame {
 
         btnProbar.addActionListener(
                 new ActionListener() {
-
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         btnProbar_click(e);
                     }
-
                 });
 
     }
